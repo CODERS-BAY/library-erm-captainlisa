@@ -7,20 +7,25 @@ Customers can also reserve books, each reservation usually results in a loan. Th
 ## ER-Model
 
 ![ER-Model](library_erm.jpeg)
+ 
+second draft:
 
-## Relational Model
+![Library ERM](library2.jpeg)
 
-* Book (**ISBN:int**, _SA-ID:int_, _List-ID:int_, publisher:varchar(32), title:varchar(32), copys:int, stock_nr:int, translation_template:int)
-* Authorlist (**List-ID:int**, _ISBN:int_, _Author-ID:int_)
-* Author (**Author-ID:int**, name:varchar(32), country:varchar(32))
-* Journal (**ISBN:int**, publisher:varchar(32), _SA-ID:int_, _Author-ID:int_, title:varchar(32), keyword:varchar(32))
-* Article (**Article-Nr:int**, *ISBN:int*, _SA-ID:int_, name:varchar(32),  _List-ID:int_)
-* Articlelist (**Article1-Nr:int**, **Article2-Nr:int**, _ISBN-1:int_, _ISBN-2:int, name1:varchar(32), name2:varchar(32))
-* Subject Area (**SA-ID:int**, _keyword:varchar(32)_ name:varchar(32))
-* Employee (**Personal-ID:int**, name:varchar(32), date_of_Birth:date, address:varchar(32), phone:int, email:varchar(32), bank_information:varchar(32))
-* Customer (**Personal-ID:int**, name:varchar(32), _Borrowing-Nr:int_, address:varchar(32), phone:int, email:varchar(32))
-* Shelve (**Shelve-Nr:int**, _SA-ID:int_, location:varchar(32))
-* Borrowing (**Borrowing-Nr:int**, _ISBN:int_ ,_Author-ID:int_, _Customer-Personal-ID:int_, stock_nr:int, date_lending:date, date_return:date, _employee-ID_lending:int_, _employee-ID_return:int_)
-* Keyword (**keyword:varchar(32)**, _Shelve-Nr:int_, relevance:int)
-* Synonym (**_keyword1:varchar(32)_**, **_keyword2:varchar(32)_**)
-* Reservation (**Reserveration-Nr:int**, _Customer-Personal-ID:int_, _ISBN:int_, loan:double, date:date)
+## Relational Model (updated to second draft)
+
+* Book (**ISBN:int**, _shelf-Nr:varchar(10)_, _suthorlist-ID:int_, _publisher-ID:varchar(32)_, title:varchar(32), copies:int, stock_nr:int, translation_template:boolean)
+* Publishing House (**publisher-ID:varchar(32)**, name:varchar(32), country:varchar(32))
+* Authorlist (**authorist-ID:int**, _ISBN:int_, _author-ID:int_)
+* Author (**author-ID:int**, _authorlist-ID:int_, firstname:varchar(32), lastname:varchar(32), country:varchar(32))
+* Journal (**ISBN:int**, _publisher-ID:varchar(32)_, _shelf-Nr:varchar(10)_, title:varchar(32))
+* Article (**article-Nr:int**, *ISBN:int*,  _authorlist-ID:int_, name:varchar(32))
+* Articlelist (**articlelist-ID:int**, _article-ID:int_, _reference-article-ID:int_)
+* Subject Area (**subject-area-ID:int**, _keyword:varchar(32)_ name:varchar(32))
+* Employee (**personal-ID:int**, firstname:varchar(32), lastname:varchar(32), date_of_Birth:date, phone:varchar(32), email:varchar(32), bank_information:varchar(32))
+* Customer (**customer-ID:int**, firstname:varchar(32), lastname:varchar(32), phone:int, email:varchar(32), date_of_Birth:date)
+* Shelf (**shelf-Nr:int**, _subject-area-ID:int_, location:varchar(32))
+* Borrowing (**borrowing-Nr:int**, _ISBN:int_, _customer-ID:int_, stock_nr:int, date_lending:date, date_return:date, _employee-lending:int_, _employee-return:int_)
+* Keyword (**keyword:varchar(32)**, _subject-area-ID:int_, relevance:int)
+* Synonym (**_keyword:varchar(32)_**, **_synonym:varchar(32)_**)
+* Reservation (**reserveration-Nr:int**, _customer-ID:int_, _ISBN:int_, loan:double, date:date)
