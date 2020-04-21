@@ -29,3 +29,7 @@ second draft:
 * Synonymlist (**_keyword:varchar(32)_**, **_synonym:varchar(32)_**)
 * Reservation (**reserveration-Nr:int**, _customer-ID:int_, _ISBN:int_, loan:double, date:date)
 * Journal (**ISBN:int**, *publisher_ID:int*, *shelf-Nr:int*, title:varchar(32), issue:varchar(7))
+
+## Library Schema
+
+![Library](library_schema.jpg)
